@@ -1,0 +1,1245 @@
+openapi: 3.1.0
+info:
+  title: tweeter_api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000/api/v1'
+paths:
+  /users:
+    post:
+      summary: ''
+      operationId: post-users
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_without_internal_id'
+        description: ''
+      parameters: []
+    get:
+      summary: ''
+      operationId: get-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      description: Users search API
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: id
+        - schema:
+            type: string
+          in: query
+          name: screen-name
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/user-properties'
+  '/users/{user_id}':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-users-user_id
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/user-properties'
+    patch:
+      summary: ''
+      operationId: patch-users-user_id
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/users/{user_id}/follow':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-users-user_id-follow
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-users-user_id-follow
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    get:
+      summary: ''
+      operationId: get-users-user_id-follow
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+  '/users/{user_id}/block':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-users-user_id-blocks
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-users-user_id-blocks
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    get:
+      summary: ''
+      operationId: get-users-user_id-blocks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/users/{user_id}/mute':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-users-user_id-mutes
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-users-user_id-mutes
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    get:
+      summary: ''
+      operationId: get-users-user_id-mutes
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/users/{user_id}/retweet-mute':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-users-user_id-retweet-muteute
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      description: ''
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-users-user_id-retweet-mute
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    get:
+      summary: ''
+      operationId: get-users-user_id-retweet-mute
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type:
+                  - object
+                  - boolean
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/users/{user_id}/likes':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-users-like
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/tweet-properties'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+  '/users/{user_id}/retweets':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-users-retweet
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/tweet-properties'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+  /bookmarks:
+    parameters: []
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      operationId: get-bookmark
+      parameters:
+        - $ref: '#/components/parameters/tweet-properties'
+        - $ref: '#/components/parameters/Authorization'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    delete:
+      summary: ''
+      operationId: delete-bookmark
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/bookmarks/{category_id}':
+    parameters:
+      - schema:
+          type: string
+        name: category_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-bookmark-bookmark_id
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/tweet-properties'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    delete:
+      summary: ''
+      operationId: delete-bookmark-bookmark_id
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  /tweets:
+    post:
+      summary: ''
+      operationId: post-tweets
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tweet_without_internal_id'
+    get:
+      summary: ''
+      operationId: get-tweets
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      description: Tweet searching API
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - schema:
+            type: integer
+          in: query
+          name: id
+        - schema:
+            type: string
+          in: query
+          name: screen_name
+        - $ref: '#/components/parameters/tweet-properties'
+  '/tweets/{tweet_id}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/tweet-properties'
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: delete-tweets-tweet_id
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/tweets/{tweet_id}/replies':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-reply
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/tweet-properties'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    post:
+      summary: ''
+      operationId: post-tweets-tweet_id-reply
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tweet_without_internal_id'
+  '/tweets/{tweet_id}/replies/count':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-reply-count
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+  '/tweets/{tweet_id}/likes':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-like
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+        - $ref: '#/components/parameters/tweet-properties'
+        - schema:
+            type: integer
+          in: query
+          name: limit
+    put:
+      summary: ''
+      operationId: put-tweets-tweet_id-like
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-tweets-tweet_id-like
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  '/tweets/{tweet_id}/likes/count':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-like-count
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+  '/tweets/{tweet_id}/retweets':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tweet_with_internal_id'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-retweet
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+    put:
+      summary: ''
+      operationId: put-tweets-tweet_id-retweet
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    delete:
+      summary: ''
+      operationId: delete-tweets-tweet_id-retweet
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  '/tweets/{tweet_id}/retweets/count':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-tweets-tweet_id-retweet-count
+      parameters:
+        - $ref: '#/components/parameters/OptionalAutorization'
+  '/tweets/{tweet_id}/bookmarks':
+    parameters:
+      - schema:
+          type: string
+        name: tweet_id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-tweets-tweet_id-bookmark
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - schema:
+            type: integer
+          in: query
+          name: category
+          required: true
+    delete:
+      summary: ''
+      operationId: delete-tweets-tweet_id-bookmark
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+    get:
+      summary: ''
+      operationId: get-tweets-tweet_id-bookmark
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+  /settings:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-settings
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/settings-properties'
+    parameters: []
+    put:
+      summary: ''
+      operationId: put-settings
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/settings'
+components:
+  schemas:
+    user_without_internal_id:
+      title: user_without_internal_id
+      type: object
+      properties:
+        screen_name:
+          type: string
+        name:
+          type: string
+        icon_uri:
+          type: string
+        is_private:
+          type: boolean
+        profile:
+          type: string
+        place:
+          type: string
+        header_uri:
+          type: string
+    user_with_internal_id:
+      title: user_with_internal_id
+      type: object
+      properties:
+        id:
+          type: integer
+        screen_name:
+          type: string
+        name:
+          type: string
+        icon_uri:
+          type: string
+        is_private:
+          type: boolean
+        profile:
+          type: string
+        place:
+          type: string
+        header_uri:
+          type: string
+    tweet_without_internal_id:
+      title: tweet_without_internal_id
+      type: object
+      properties:
+        user_id:
+          type: integer
+        tweeted_at:
+          type: string
+        content:
+          type: string
+        reply_to:
+          type: integer
+        reply_category:
+          type: integer
+        image1_uri:
+          type: string
+        image2_uri:
+          type: string
+        image3_uri:
+          type: string
+        image4_uri:
+          type: string
+    tweet_with_internal_id:
+      title: tweet_with_internal_id
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        tweeted_at:
+          type: string
+        content:
+          type: string
+        reply_to:
+          type: integer
+        reply_category:
+          type: integer
+        image1_uri:
+          type: string
+        image2_uri:
+          type: string
+        image3_uri:
+          type: string
+        image4_uri:
+          type: string
+    settings:
+      title: settings
+      type: object
+      properties:
+        language:
+          type: integer
+        colormode:
+          type: integer
+  requestBodies: {}
+  parameters:
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      schema:
+        type: string
+      description: 'Bearer [Access Token]の形式'
+    user-properties:
+      name: properties
+      in: query
+      schema:
+        type: string
+        pattern: '^([-a-zA-Z1-9_]+,?)*$'
+      description: '"all", "none"もしくは「user_without_internal_id」のパラメータ名をカンマ結合したもの。デフォルトは"all"'
+    OptionalAutorization:
+      name: Autorization
+      in: header
+      required: false
+      schema:
+        type: string
+      description: 'Bearer [Access Token]の形式'
+    tweet-properties:
+      name: properties
+      in: query
+      required: false
+      schema:
+        type: string
+      description: '"all", "none"もしくは「tweet_without_internal_id」のパラメータ名をカンマ結合したもの。ただし、"image1_uri"～"image4_uri"を全て選択する時は、代わりに"images"としてよい。デフォルトは"all"'
+    settings-properties:
+      name: properties
+      in: query
+      schema:
+        type: string
+        pattern: '^([-a-zA-Z1-9_]+,?)*$'
+      description: '"all", "none"もしくは「settings」のパラメータ名をカンマ結合したもの。デフォルトは"none"'
+  responses:
+    error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+              code:
+                type: integer
+              message:
+                type: string
+            required:
+              - type
+              - code
+              - message
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+    success:
+      description: 'API処理成功時のレスポンス。各APIエンドポイントで規定されているResponse Bodyは,実際には"result"プロパティ内に格納される。'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                oneOf:
+                  - type: object
+                  - type: array
+                    items: {}
+                  - type: integer
+                    properties: {}
+                  - type: boolean
+                    properties: {}
+                  - type: 'null'
+                    properties: {}
+              meta:
+                type: object
+                required:
+                  - status
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+            required:
+              - result
+              - meta
